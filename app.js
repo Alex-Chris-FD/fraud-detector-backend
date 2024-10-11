@@ -21,7 +21,13 @@ const pool = new Pool(dbConfig);
 app.get('/data', async (req, res) => {
   try {
     // Query the database
-    const result = await pool.query('SELECT * FROM fraud_results;');
+    const result = await pool.query('SELECT id, sample_fraud_detection_model_insightscore, rule_id, outcomes FROM fraud_results;');
+
+    // // Print the result to the console
+    // console.log('Query result:');
+    // console.log(result.rows);
+
+    // Return the result as JSON
     res.json(result.rows);
   } catch (err) {
     console.error('Error fetching data:', err.message);
