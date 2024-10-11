@@ -32,12 +32,3 @@ app.get('/data', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
-
-
-pool.query('SELECT * FROM fraud_results', (err, res) => {
-  if (err) {
-    console.error('Error executing query:', err);
-    return;
-  }
-  console.log('Query result:', res.rows);
-});
