@@ -1,17 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
 
-// Add your Postgres database credentials here
 const dbConfig = {
-  host: 'fraud-results.cjgg8gioeyrk.us-east-1.rds.amazonaws.com',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: 'fraudteam',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   ssl: {
-    rejectUnauthorized: false
+    rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' ? false : true
   }
 };
 
@@ -22,10 +23,6 @@ app.get('/data', async (req, res) => {
   try {
     // Query the database
     const result = await pool.query('SELECT id, sample_fraud_detection_model_insightscore, rule_id, outcomes FROM fraud_results;');
-
-    // // Print the result to the console
-    // console.log('Query result:');
-    // console.log(result.rows);
 
     // Return the result as JSON
     res.json(result.rows);
