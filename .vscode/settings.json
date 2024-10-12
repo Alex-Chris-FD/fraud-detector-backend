@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "alex-chris-fd",
+        "projectKey": "Alex-Chris-FD_fraud-detector-backend"
+    }
+}
