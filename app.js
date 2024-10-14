@@ -34,7 +34,7 @@ app.use(express.json());
 // Create a connection pool to the database
 const pool = new Pool(dbConfig);
 
-app.get('/data', async (req, res) => {
+app.get('/api/data', async (req, res) => {
   try {
     // Query the database
     const result = await pool.query('SELECT id, sample_fraud_detection_model_insightscore, rule_id, outcomes FROM fraud_results;');
