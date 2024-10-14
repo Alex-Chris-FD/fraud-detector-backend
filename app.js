@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const cors = require('cors');
 const express = require('express');
 const { Pool } = require('pg');
 
@@ -15,6 +16,20 @@ const dbConfig = {
     rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' ? false : true
   }
 };
+
+// Add CORS middleware
+app.use(cors({
+  origin: 'http://localhost:3001'
+}));
+
+// Alternatively, you can use the following middleware to specify the allowed origins
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
+app.use(express.json());
 
 // Create a connection pool to the database
 const pool = new Pool(dbConfig);
