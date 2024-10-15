@@ -9,8 +9,9 @@
   "devDependencies": {
     "nodemon": "^3.1.7"
   },
-  "scripts": {
-    "start": "nodemon app.js",
-    "test": "jest"
-  }
+"scripts": {
+  "start": "nodemon app.js",
+  "test": "jest",
+  "build": "node app.js"
+}
 }
