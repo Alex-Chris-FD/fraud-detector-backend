@@ -1,5 +1,5 @@
-require('dotenv').config();
 
+require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const { Pool } = require('pg');
@@ -16,10 +16,14 @@ const dbConfig = {
     rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' ? false : true
   }
 };
+console.log(dbConfig);
+
 
 // Add CORS middleware
 app.use(cors({
-  origin: 'http://localhost:3001'
+  origin: 'http://localhost:3000',
+  allowedHeaders: ['Content-Type', 'Accept'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 // Alternatively, you can use the following middleware to specify the allowed origins
@@ -42,7 +46,7 @@ app.get('/api/data', async (req, res) => {
     // Return the result as JSON
     res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching data:', err.message);
+    console.error('Error fetching data:', err);
     res.status(500).json({ message: 'Error fetching data' });
   }
 });
